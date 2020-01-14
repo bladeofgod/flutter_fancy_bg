@@ -20,6 +20,7 @@ class AnimatedWave extends StatelessWidget{
 
   @override
   Widget build(BuildContext context) {
+    //可以获得父view所给的最大空间
     return LayoutBuilder(
       builder: (ctx,constraints){
         return Container(
@@ -31,6 +32,10 @@ class AnimatedWave extends StatelessWidget{
             tween: Tween(begin: 0.0,end: 2 * pi),
             builder: (ctx,value){
               return CustomPaint(
+                //value 的值在0.0-2 * pi 变动，
+                //CurvePainter 会根据value + offset和 Y进行重绘，
+                //在CurvePainter中,通过这个Y 生成了贝塞尔曲线的起始点、结束点和控制点
+                //整个变动中会造成上方移动的曲线效果
                 foregroundPainter: CurvePainter(value + offset),
               );
             },
